@@ -20,17 +20,32 @@ class NumericCell
   def initialize(cell)
     @cell = cell
   end
+
+  def value
+    @cell.getNumericCellValue
+  end
 end
 
 class FormulaCell
+  attr_reader :cell
+
   def initialize(cell)
     @cell = cell
   end
+
+  def value
+    @cell
+  end
+
 end
 
 class BlankCell
   def initialize(cell)
     @cell = cell
+  end
+
+  def value
+    nil
   end
 
 end
