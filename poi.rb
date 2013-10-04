@@ -29,25 +29,63 @@ class Poi
   end
 
   def worksheet(index)
-    Worksheet.new @workbook.getSheetAt(0)
+    Worksheet.new @workbook.getSheetAt(index)
   end
 end
 
 class Worksheet
+  attr_reader :worksheet
   def initialize(worksheet)
     @worksheet = worksheet
   end
 
   def rows
+    row_count.times.map do |i|
+      row(i)
+    end
+  end
 
+  def row(index)
+    Row.new @worksheet.getRow(index)
+  end
+
+  private
+
+  def row_count
+    @worksheet.getLastRowNum
   end
 
 end
 
 class Row
+  attr_reader :row
+  def initialize(row)
+    @row = row
+  end
+
+  def cells
+    cell_count.times.map do |i|
+      cell(i)
+    end
+  end
+
+  def cell(index)
+    Cell.new @row.getCell(index)
+  end
+
+  private
+
+  def cell_count
+    @row.getLastCellNum
+  end
+
 end
 
 class Cell
+  attr_reader :cell
+  def initialize(cell)
+    @cell = cell
+  end
 end
 
 class NumericCell
