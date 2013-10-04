@@ -12,7 +12,7 @@ import java.io.FileInputStream
 
 WB = Java::OrgApachePoiSsUsermodel::Workbook
 WorkbookFactory = Java::OrgApachePoiSsUsermodel::WorkbookFactory
-HSSF = Java::OrgApachePoiHssfUsermodel::HSSFWorkbook
+HSSFWorkbook = Java::OrgApachePoiHssfUsermodel::HSSFWorkbook
 
 class Poi
   attr_reader :workbook
@@ -23,7 +23,7 @@ class Poi
   end
 
   def worksheets
-    @workbook.get_number_of_sheets.map do |i|
+    @workbook.get_number_of_sheets.times.map do |i|
       Worksheet.new @workbook.getSheetAt i
     end
   end
@@ -51,9 +51,9 @@ class Cell
 end
 
 class NumericCell
+end
 
+class FormulaCell
 end
 
 
-filename = 'USA_Country_MetaData_en_EXCEL.xls'
-p = Poi.new filename
