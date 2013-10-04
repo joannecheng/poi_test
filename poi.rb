@@ -1,3 +1,4 @@
+require 'cell'
 require 'java'
 require 'jar/poi-3.9-20131003.jar'
 require 'jar/poi-excelant-3.9-20131003.jar'
@@ -49,6 +50,10 @@ class Worksheet
     Row.new @worksheet.getRow(index)
   end
 
+  def name
+    @worksheet.getSheetName()
+  end
+
   private
 
   def row_count
@@ -70,7 +75,8 @@ class Row
   end
 
   def cell(index)
-    Cell.new @row.getCell(index)
+    cell = @row.getCell(index)
+    Cell.cell_by_type(cell)
   end
 
   private
@@ -80,18 +86,4 @@ class Row
   end
 
 end
-
-class Cell
-  attr_reader :cell
-  def initialize(cell)
-    @cell = cell
-  end
-end
-
-class NumericCell
-end
-
-class FormulaCell
-end
-
 
